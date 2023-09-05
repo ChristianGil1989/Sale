@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Sales.API.Data;
+using Sales.API.SalesMappers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,7 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConexionSQLDB"));
 });
 
+builder.Services.AddAutoMapper(typeof(SalesMappers));
 // Add services to the container.
 
 builder.Services.AddControllers();
