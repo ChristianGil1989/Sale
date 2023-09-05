@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Sales.API.Data;
+using Sales.API.Models;
+using Sales.API.Repository;
+using Sales.API.Repository.IRepository;
 using Sales.API.SalesMappers;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +13,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 });
 
 builder.Services.AddAutoMapper(typeof(SalesMappers));
+builder.Services.AddScoped<IProduct, ProductRepository>();
 // Add services to the container.
 
 builder.Services.AddControllers();
