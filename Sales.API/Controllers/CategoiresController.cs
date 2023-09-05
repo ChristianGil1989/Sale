@@ -19,6 +19,11 @@ namespace Sales.API.Controllers
             _context = context;
             _mapper = mapper;
         }
+        [HttpGet]
+        public async Task<IActionResult> GetAsync()
+        {
+            return Ok(await _context.Categories.OrderBy(c => c.Name).ToListAsync());
+        }
 
         [HttpPost]
         public async Task<ActionResult> Post(CategoryDto categoryDto)
