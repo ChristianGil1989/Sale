@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Sales.API.Models;
@@ -46,7 +47,7 @@ namespace Sales.API.Controllers
             var productDto = _mapper.Map<ProductDto>(product);
             return Ok(productDto);
         }
-
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public IActionResult CreateProduct([FromBody] ProductDto productDto)
         {
@@ -74,7 +75,7 @@ namespace Sales.API.Controllers
                 return BadRequest(dbUpdateException.InnerException.Message);
             }
         }
-
+        [Authorize(Roles = "admin")]
         [HttpPatch("{productoId:int}", Name = "UpdateProduct")]
         public IActionResult UpdateProduct(int productoId, [FromBody] ProductDto productDto)
         {
@@ -92,6 +93,7 @@ namespace Sales.API.Controllers
             }
             return NoContent();
         }
+        [Authorize(Roles = "admin")]
         [HttpDelete("{productId:int}", Name = "DeleteProduct")]
         public IActionResult DeleteProduct(int productId)
         {

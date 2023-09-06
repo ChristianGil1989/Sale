@@ -8,7 +8,6 @@ using Sales.API.Models.DTOs;
 
 namespace Sales.API.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("/api/categories")]
     public class CategoiresController : ControllerBase
@@ -27,6 +26,7 @@ namespace Sales.API.Controllers
             return Ok(await _context.Categories.OrderBy(c => c.Name).ToListAsync());
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<ActionResult> Post(CategoryDto categoryDto)
         {
@@ -78,6 +78,7 @@ namespace Sales.API.Controllers
 
             return Ok(category);
         }
+        [Authorize(Roles = "admin")]
         [HttpPut]
         public async Task<ActionResult> Put(Category category)
         {
@@ -109,6 +110,7 @@ namespace Sales.API.Controllers
             }
         }
 
+        [Authorize(Roles = "admin")]
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
