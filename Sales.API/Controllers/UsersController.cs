@@ -80,9 +80,6 @@ namespace Sales.API.Controllers
         }
 
         [HttpPost("Login")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult>Login([FromBody] LoginUserDto loginUserDto)
         {
             var responLogin = await _user.LoginUser(loginUserDto);
