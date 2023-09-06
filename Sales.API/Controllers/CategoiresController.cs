@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Sales.API.Data;
@@ -7,6 +8,7 @@ using Sales.API.Models.DTOs;
 
 namespace Sales.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("/api/categories")]
     public class CategoiresController : ControllerBase

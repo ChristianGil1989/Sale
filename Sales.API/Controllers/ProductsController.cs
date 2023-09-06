@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Sales.API.Data;
 using Sales.API.Models;
 using Sales.API.Models.DTOs;
 using Sales.API.Repository.IRepository;
@@ -22,13 +21,13 @@ namespace Sales.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetProducts() 
+        public IActionResult GetProducts()
         {
             var listProducts = _repoProduct.GetProducts();
 
             var listProductsDto = new List<ProductDto>();
 
-            foreach (var products in listProducts) 
+            foreach (var products in listProducts)
             {
                 listProductsDto.Add(_mapper.Map<ProductDto>(products));
             }
@@ -40,7 +39,7 @@ namespace Sales.API.Controllers
         {
             var product = _repoProduct.GetProduct(productId);
 
-            if (product == null) 
+            if (product == null)
             {
                 return BadRequest();
             }
@@ -49,13 +48,13 @@ namespace Sales.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateProduct([FromBody] ProductDto productDto) 
+        public IActionResult CreateProduct([FromBody] ProductDto productDto)
         {
-            if (productDto == null) 
+            if (productDto == null)
             {
                 return BadRequest(ModelState);
             }
-            if(!ModelState.IsValid) 
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
@@ -68,16 +67,16 @@ namespace Sales.API.Controllers
                     return StatusCode(500, ModelState);
 
                 }
-                return CreatedAtRoute("GetProduct", new { productId = createProduct.Id}, createProduct);
+                return CreatedAtRoute("GetProduct", new { productId = createProduct.Id }, createProduct);
             }
             catch (DbUpdateException dbUpdateException)
-            {            
+            {
                 return BadRequest(dbUpdateException.InnerException.Message);
             }
         }
 
         [HttpPatch("{productoId:int}", Name = "UpdateProduct")]
-        public IActionResult UpdateProduct(int productoId, [FromBody] ProductDto productDto) 
+        public IActionResult UpdateProduct(int productoId, [FromBody] ProductDto productDto)
         {
             if (!ModelState.IsValid)
             {
@@ -93,11 +92,11 @@ namespace Sales.API.Controllers
             }
             return NoContent();
         }
-        [HttpDelete("{productId:int}",Name = "DeleteProduct")]
+        [HttpDelete("{productId:int}", Name = "DeleteProduct")]
         public IActionResult DeleteProduct(int productId)
         {
             var product = _repoProduct.GetProduct(productId);
-            if (product == null) 
+            if (product == null)
             {
                 return NotFound();
             }
