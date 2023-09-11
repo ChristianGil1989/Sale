@@ -16,11 +16,14 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConexionSQLDB"));
 });
 
+builder.Services.AddTransient<SeedDb>();
 builder.Services.AddAutoMapper(typeof(SalesMappers));
 builder.Services.AddScoped<IProduct, ProductRepository>();
 builder.Services.AddScoped<IEncrypPassword, EncrypPassword>();
 builder.Services.AddScoped<IUser, UserRepository>();
 var key = builder.Configuration.GetValue<string>("ApiSettings:SecretKey");
+
+
 // Add services to the container.
 builder.Services.AddAuthentication(x =>
 {
@@ -44,6 +47,18 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+SeedData(app);
+
+void SeedData(WebApplication app)
+{
+    IServiceScopeFactory? scopedFactory = app.Services.GetService<IServiceScopeFactory>();
+
+    using (IServiceScope? scope = scopedFactory!.CreateScope())
+    {
+        SeedDb? service = scope.ServiceProvider.GetService<SeedDb>();
+        service!.SeedDdAsync().Wait();
+    }
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

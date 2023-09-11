@@ -1,4 +1,5 @@
-﻿using Sales.API.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Sales.API.Data;
 using Sales.API.Models;
 using Sales.API.Repository.IRepository;
 
@@ -36,7 +37,9 @@ namespace Sales.API.Repository
 
         public ICollection<Product> GetProducts()
         {
-            return _context.Products.OrderBy(c => c.Name).ToList();
+            return _context.Products
+                   .Include(c => c.Category)                
+                   .OrderBy(c => c.Name).ToList();
         }
 
         public ICollection<Product> GetProductsByPrice(decimal initialPrice, decimal finalPrice)

@@ -1,0 +1,443 @@
+{
+	"info": {
+		"_postman_id": "abfdfc6d-5f8a-4800-b3fb-8e9eb0026e09",
+		"name": "CollectionApiPrpducts",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8285391"
+	},
+	"item": [
+		{
+			"name": "ServicesUsers",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"hiangil0211@gmail.com\",\r\n  \"password\": \"Qwer1234*\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7270/api/Users/Login",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7270",
+							"path": [
+								"api",
+								"Users",
+								"Login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"andrea1905@hotmail.com\",\r\n  \"name\": \"Andrea\",\r\n  \"lastName\": \"Marin\",\r\n  \"password\": \"Abcd1234*\",\r\n  \"role\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7270/api/Users/UserRegister",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7270",
+							"path": [
+								"api",
+								"Users",
+								"UserRegister"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUserById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7270/api/Users/userId:int?userId=2",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7270",
+							"path": [
+								"api",
+								"Users",
+								"userId:int"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUsers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7270/api/Users",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7270",
+							"path": [
+								"api",
+								"Users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ServicesCategories",
+			"item": [
+				{
+					"name": "GetCategories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7270/api/categories",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7270",
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCategoryById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7270/api/categories/6",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7270",
+							"path": [
+								"api",
+								"categories",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddCategory",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7270/api/categories",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7270",
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EditCategory",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImhpYW5naWwwMjExQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsIm5iZiI6MTY5NDM5NjQ0OSwiZXhwIjoxNjk1MDAxMjQ5LCJpYXQiOjE2OTQzOTY0NDl9.2GZWdg0ugIvV2T7XYSHleTpgaYKSIeu2MHknhWnt0nM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 6,\r\n  \"name\": \"Aventura\",\r\n  \"creationDate\": \"2023-09-11T01:59:22.617Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7270/api/categories",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7270",
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteCategory",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImhpYW5naWwwMjExQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsIm5iZiI6MTY5NDM5NjQ0OSwiZXhwIjoxNjk1MDAxMjQ5LCJpYXQiOjE2OTQzOTY0NDl9.2GZWdg0ugIvV2T7XYSHleTpgaYKSIeu2MHknhWnt0nM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7270/api/categories/6",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7270",
+							"path": [
+								"api",
+								"categories",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ServicesProducts",
+			"item": [
+				{
+					"name": "GetProducts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7270/api/Products",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7270",
+							"path": [
+								"api",
+								"Products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetproductById",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "GetProductsByPrice",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7270/api/Products/3000,6000",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7270",
+							"path": [
+								"api",
+								"Products",
+								"3000,6000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetProductByName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7270/api/Products/Martillo",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7270",
+							"path": [
+								"api",
+								"Products",
+								"Martillo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateProdcut",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImhpYW5naWwwMjExQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsIm5iZiI6MTY5NDM5NjQ0OSwiZXhwIjoxNjk1MDAxMjQ5LCJpYXQiOjE2OTQzOTY0NDl9.2GZWdg0ugIvV2T7XYSHleTpgaYKSIeu2MHknhWnt0nM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"Martillo\",\r\n  \"description\": \"Martillo de hierro\",\r\n  \"price\": 6000,\r\n  \"initialAmount\": 12,\r\n  \"creationDate\": \"2023-09-11T02:36:56.529Z\",\r\n  \"categoryId\": 9\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7270/api/Products",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7270",
+							"path": [
+								"api",
+								"Products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateProduct",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImhpYW5naWwwMjExQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsIm5iZiI6MTY5NDM5NjQ0OSwiZXhwIjoxNjk1MDAxMjQ5LCJpYXQiOjE2OTQzOTY0NDl9.2GZWdg0ugIvV2T7XYSHleTpgaYKSIeu2MHknhWnt0nM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 5,\r\n  \"name\": \"Martillo\",\r\n  \"description\": \"Martillo de hierro para construccion\",\r\n  \"price\": 6000,\r\n  \"initialAmount\": 12,\r\n  \"creationDate\": \"2023-09-11T02:36:56.529Z\",\r\n  \"categoryId\": 9\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7270/api/Products/9",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7270",
+							"path": [
+								"api",
+								"Products",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImhpYW5naWwwMjExQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsIm5iZiI6MTY5NDM5NjQ0OSwiZXhwIjoxNjk1MDAxMjQ5LCJpYXQiOjE2OTQzOTY0NDl9.2GZWdg0ugIvV2T7XYSHleTpgaYKSIeu2MHknhWnt0nM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7270/api/Products/8",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7270",
+							"path": [
+								"api",
+								"Products",
+								"8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

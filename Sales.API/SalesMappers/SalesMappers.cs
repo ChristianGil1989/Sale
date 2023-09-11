@@ -10,6 +10,7 @@ namespace Sales.API.SalesMappers
         {
             CreateMap<Category, CategoryDto>().ReverseMap();
             CreateMap<Product, ProductDto>().ReverseMap();
+            CreateMap<UserDto, User>().ReverseMap();
         }
         
     }

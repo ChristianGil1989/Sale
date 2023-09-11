@@ -70,9 +70,11 @@ namespace Sales.API.Controllers
                 }
                 return CreatedAtRoute("GetProduct", new { productId = createProduct.Id }, createProduct);
             }
-            catch (DbUpdateException dbUpdateException)
+            catch (Exception)
             {
-                return BadRequest(dbUpdateException.InnerException.Message);
+
+                ModelState.AddModelError("", "No se pudo crear el registro");
+                return StatusCode(500, ModelState);
             }
         }
         [Authorize(Roles = "admin")]
@@ -86,12 +88,23 @@ namespace Sales.API.Controllers
 
             var product = _mapper.Map<Product>(productDto);
 
-            if (!_repoProduct.UpdateProduct(product))
+            try
             {
+                if (!_repoProduct.UpdateProduct(product))
+                {
+                    ModelState.AddModelError("", "No se pudo actualizar el registro");
+                    return StatusCode(500, ModelState);
+                }
+                return NoContent();
+
+            }
+            catch (Exception)
+            {
+
                 ModelState.AddModelError("", "No se pudo actualizar el registro");
                 return StatusCode(500, ModelState);
             }
-            return NoContent();
+          
         }
         [Authorize(Roles = "admin")]
         [HttpDelete("{productId:int}", Name = "DeleteProduct")]

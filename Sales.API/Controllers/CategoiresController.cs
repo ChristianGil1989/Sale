@@ -93,16 +93,9 @@ namespace Sales.API.Controllers
                 await _context.SaveChangesAsync();
                 return Ok(category);
             }
-            catch (DbUpdateException dbUpdateException)
+            catch (DbUpdateException)
             {
-                if (dbUpdateException.InnerException!.Message.Contains("duplicate"))
-                {
-                    return BadRequest("Ya existe un registro con el mismo nombre.");
-                }
-                else
-                {
-                    return BadRequest(dbUpdateException.InnerException.Message);
-                }
+                return BadRequest("No se pudo actualizar el registro");
             }
             catch (Exception exception)
             {

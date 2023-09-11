@@ -44,7 +44,7 @@ namespace Sales.API.Controllers
             {
                 return NotFound();
             }
-            var userDto = _mapper.Map<CategoryDto>(user);
+            var userDto = _mapper.Map<UserDto>(user);
             return Ok(userDto);
         }
 
