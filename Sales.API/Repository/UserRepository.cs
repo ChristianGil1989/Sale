@@ -91,7 +91,6 @@ namespace Sales.API.Repository
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
-            user.Password = passwordEncryp;
             return user;
         }
     }

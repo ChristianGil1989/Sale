@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Sales.API.Data;
 using Sales.API.Models;
 using Sales.API.Models.DTOs;
 using Sales.API.Repository.IRepository;
@@ -14,11 +15,13 @@ namespace Sales.API.Controllers
     {
         private readonly IProduct _repoProduct;
         private readonly IMapper _mapper;
+        private readonly DataContext _context;
 
-        public ProductsController(IProduct repoProduct, IMapper mapper)
+        public ProductsController(IProduct repoProduct, IMapper mapper, DataContext context)
         {
             _repoProduct = repoProduct;
             _mapper = mapper;
+            _context = context;
         }
 
         [HttpGet]
@@ -150,6 +153,33 @@ namespace Sales.API.Controllers
             }
             var productDto = _mapper.Map<ProductDto>(product);
             return Ok(productDto);
+        }
+
+        [HttpGet()]
+        [Route("GetAsyncDos")]
+        public async Task<IActionResult> GetAsyncDos()
+        {
+            return Ok(await _context.Products
+                            .Include(c => c.Category)
+                            .OrderBy(c => c.Id).ToListAsync());
+        }
+        [HttpGet]
+        [Route("GetAsyncTres")]
+        public async Task<IActionResult> GetProductsAndCategory()
+        {
+            var listProducts = await _repoProduct.GetProductsAndCatogory();
+
+            return Ok(listProducts);
+        }
+
+
+        [HttpGet]
+        [Route("GetProductsAndCatogory")]
+        public async Task<IActionResult> GetProductsAndCatogory()
+        {
+            var listProducts = await _repoProduct.GetProductsAndCatogory();
+
+            return Ok(listProducts);
         }
     }
 }

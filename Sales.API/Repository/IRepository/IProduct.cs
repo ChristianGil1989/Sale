@@ -13,5 +13,6 @@ namespace Sales.API.Repository.IRepository
         bool UpdateProduct(Product product);
         bool DeleteProduct(Product product);
         bool SaveProduct();
+        Task<List<Product>> GetProductsAndCatogory();
     }
 }

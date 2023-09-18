@@ -1,7 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Sales.API.Data;
 using Sales.API.Models;
+using Sales.API.Models.DTOs;
 using Sales.API.Repository.IRepository;
+using XAct;
 
 namespace Sales.API.Repository
 {
@@ -68,6 +71,48 @@ namespace Sales.API.Repository
             product.CreationDate = DateTime.Now;
             _context.Products.Update(product);
             return SaveProduct();
+        }
+        public async Task<List<Product>> GetProductsAndCatogory() 
+        {
+            var list =  await _context.Products
+                        .Include(c => c.Category)
+                        .GroupBy(c => c.Name)
+                        .Select(g => new 
+                        {
+                            Id = g.Key,
+                            IdP = g.First().Id,
+                            Name = g.First().Name,
+                            Description = g.First().Description,
+                            Price = g.Sum(s => s.Price),
+                            InitialAmount = g.Sum(s => s.InitialAmount),
+                            CreationDate = g.First().CreationDate,
+                            Category = g.First().Category,
+
+                            
+                            
+                        }).ToListAsync();
+
+            var listProducts = new List<Product>();
+            
+            foreach (var product in list) 
+            {
+                listProducts.Add(new Product 
+                {
+                    Id = product.IdP,
+                    Name = product.Name,
+                    Description = product.Description,
+                    Price = product.Price,
+                    InitialAmount = product.InitialAmount,
+                    CreationDate = product.CreationDate,
+                    CategoryId = product.Category.Id,
+                    Category = product.Category,
+                    
+                });
+                
+            }
+
+            return listProducts;
+
         }
     }
 }

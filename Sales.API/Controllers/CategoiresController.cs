@@ -26,6 +26,7 @@ namespace Sales.API.Controllers
             return Ok(await _context.Categories.OrderBy(c => c.Name).ToListAsync());
         }
 
+       
         [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<ActionResult> Post(CategoryDto categoryDto)
